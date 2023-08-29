@@ -1,0 +1,55 @@
+name: Deploy gh-pages
+# 在master分支发生push事件时触发。
+on:
+  # 定时执行
+#  schedule:
+#    - cron: '0 0 * * *'
+
+  # 在制定分支发生push时执行
+  push:
+    branches:
+      - main
+
+  # 在制定分支发生PR时执行
+  pull_request:
+    branches:
+      - main
+# 需要执行的任务
+jobs:
+  # lint任务
+#  lint:
+#    runs-on: ubuntu-latest #运行在虚拟机环境ubuntu-latest
+#    steps:
+#      - name: checkout code repository # 步骤的名字 切到对应的分支
+#        uses: actions/checkout@v2 # 使用actions/checkout@v2这个action
+#        with: # 这个action的参数
+#          fetch-depth: 0
+#
+#      - name: Install
+#        run: npm install
+#
+#      - name: Run Lint
+#        run: pnpm run lint
+
+  deploy:
+    runs-on: ubuntu-latest #运行在虚拟机环境ubuntu-latest
+    steps:
+      - name: checkout code repository # 步骤的名字 切到对应的分支
+        uses: actions/checkout@v2 # 使用actions/checkout@v2这个action
+        with: # 这个action的参数
+          fetch-depth: 0
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN  }}
+          publish_dir: ./dist
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+

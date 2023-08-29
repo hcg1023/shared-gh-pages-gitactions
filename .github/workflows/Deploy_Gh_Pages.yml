@@ -1,4 +1,7 @@
 name: Deploy gh-pages
+# 环境变量
+#env:
+
 # 在master分支发生push事件时触发。
 on:
   # 定时执行

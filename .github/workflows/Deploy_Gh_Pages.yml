@@ -35,6 +35,9 @@ jobs:
         run: npm run lint
 
   deploy:
+    # lint执行完成后再执行部署
+    needs:
+      - lint
     runs-on: ubuntu-latest #运行在虚拟机环境ubuntu-latest
     steps:
       - name: checkout code repository # 步骤的名字 切到对应的分支

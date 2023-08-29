@@ -29,10 +29,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install
-        run: pnpm install
+        run: npm install
 
       - name: Run Lint
-        run: pnpm run lint
+        run: npm run lint
 
   deploy:
     runs-on: ubuntu-latest #运行在虚拟机环境ubuntu-latest
@@ -43,10 +43,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install
-        run: pnpm install
+        run: npm install
 
       - name: Build
-        run: pnpm run build
+        run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3 # 其它用户创建的actions
